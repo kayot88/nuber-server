@@ -11,6 +11,6 @@ const appOptions: Options = {
   endpoint: GRAPHQL_ENDPOINT
 };
 
-const handleAppStart = () => console.log(`listening on http://localhost:${PORT}/playground`);
+const handleAppStart = () =>
+  console.log(`listening on http://localhost:${PORT}/playground`);
 app.start(appOptions, handleAppStart);
-// yoga-server end
