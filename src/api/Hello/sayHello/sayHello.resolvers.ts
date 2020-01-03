@@ -8,12 +8,10 @@ const resolvers = {
     sayHello: (_: any, args: SayHelloQueryArgs): SeyHelloResponse => {
       return {
         error: false,
-        text: `fuck you ${args.name}`
+        text: `fuck you  ${args.name}`
       };
     }
   }
 };
-
-
 
 export default resolvers;
