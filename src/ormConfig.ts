@@ -6,10 +6,10 @@ const connectionOptions: ConnectionOptions = {
   synchronize: true,
   logging: true,
   entities: ["src/entities/**/*.ts"],
-  host: process.env.DB_ENDPOINT || "localhost",
+  host: process.env.DB_ENDPOINT,
   port: 5432,
-  username: process.env.DB_USERNAME || "postgres",
-  password: process.env.DB_PASSWORD || "hnpxBZ88"
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD
 
   // migrations: ["src/migration/**/*.ts"],
   // subscribers: ["src/subscriber/**/*.ts"]

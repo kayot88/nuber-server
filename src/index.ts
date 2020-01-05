@@ -1,7 +1,10 @@
+import dotenv from "dotenv";
+dotenv.config();
 import { Options } from "graphql-yoga";
 import { createConnection } from "typeorm";
 import app from "./app";
 import connectionOptions from "./ormConfig";
+// console.log(process.env);
 // yoga-server start
 const PORT: number | string = process.env.PORT || 4000;
 const PLAYGROUND: string = "/playground";
@@ -19,7 +22,6 @@ try {
   createConnection(connectionOptions).then(() =>
     app.start(appOptions, handleAppStart)
   );
-  
 } catch (error) {
   console.log(error);
 }
