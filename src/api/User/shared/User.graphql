@@ -16,8 +16,10 @@ type User {
   lastLng: Float
   lastLat: Float
   lastOrientation: Float
+  chat: Chat
+  messages: [Message]
   createdAt: String!
-  updatedAt: String!
+  updatedAt: String
 }
 
 type Query {

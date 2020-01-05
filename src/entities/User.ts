@@ -6,10 +6,14 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   BeforeInsert,
-  BeforeUpdate
+  BeforeUpdate,
+  ManyToOne,
+  OneToMany
 } from "typeorm";
 import { IsEmail } from "class-validator";
 import bcrypt from "bcrypt";
+import Chat from "./Chat";
+import Message from "./Message";
 
 const saltRounds = 10;
 
@@ -66,6 +70,19 @@ class User extends BaseEntity {
 
   @CreateDateColumn() createdAt: string;
   @UpdateDateColumn() updatedAt: string;
+
+  @ManyToOne(
+    type => Chat,
+    chat => chat.participants
+  )
+  chat: Chat;
+
+  @OneToMany(
+    type => Message,
+    message => message.user
+  )
+  messages: Message[]
+  
 
   get fullname(): string {
     return `${this.firstName} ${this.lastName}`;
