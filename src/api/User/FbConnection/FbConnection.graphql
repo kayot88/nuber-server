@@ -1,0 +1,14 @@
+type FbConResponse {
+  ok: Boolean!
+  error: String
+  token: String
+}
+
+type Mutation {
+  FbConnection(
+    firstName: String!
+    lastName: String!
+    email: String
+    fbId: String
+  ): FbConResponse!
+}

@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "outDir": "dist",
+    "rootDir": "src/",
+    "outDir": "dist/",
     "module": "commonjs",
     "target": "es5",
     "lib": ["es6", "dom", "esnext.asynciterable"],
     "sourceMap": true,
     "allowJs": true,
     "moduleResolution": "node",
-    "rootDir": "src",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
@@ -21,6 +21,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
+  // "include": ["src/**/*"],
   "exclude": [
     "node_modules",
     "build",
@@ -28,6 +29,7 @@
     "acceptance-tests",
     "webpack",
     "jest",
-    "src/setupTests.ts"
+    "src/setupTests.ts",
+    "graphquill.config.js"
   ]
 }

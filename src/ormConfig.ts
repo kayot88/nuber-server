@@ -5,7 +5,7 @@ const connectionOptions: ConnectionOptions = {
   database: "nuber",
   synchronize: true,
   logging: true,
-  entities: ["src/entities/**/*.ts"],
+  entities: [__dirname + '/entities/**/*.ts'],
   host: process.env.DB_ENDPOINT,
   port: 5432,
   username: process.env.DB_USERNAME,

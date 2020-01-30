@@ -11,7 +11,7 @@ console.log(allTypes);
 const allResolvers: any[] = fileLoader(
   path.join(__dirname, "./api/**/*.resolvers.*")
 );
-console.log(allResolvers);
+// console.log(allResolvers);
 
 const mergedTypes = mergeTypes(allTypes);
 const mergedResolvers = mergeResolvers(allResolvers);

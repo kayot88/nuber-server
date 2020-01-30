@@ -36,10 +36,22 @@ type Ride {
   dropOffLat: Float!
   dropOffLng: Float!
   price: Float!
+  driver: User!
+  passenger: User!
   distance: String!
   duration: String!
   createdAt: String!
   updatedAt: String
+}
+
+type FbConResponse {
+  ok: Boolean!
+  error: String
+  token: String
+}
+
+type Mutation {
+  FbConnection(firstName: String!, lastName: String!, email: String, fbId: String): FbConResponse!
 }
 
 type User {
@@ -52,6 +64,7 @@ type User {
   password: String
   phoneNumber: String
   verifiedPhoneNumber: Boolean!
+  fbId: String
   profilePhoto: String
   fullName: String
   isDriving: Boolean!
@@ -62,6 +75,7 @@ type User {
   lastOrientation: Float
   chat: Chat
   messages: [Message]
+  verifications: [Verification]
   createdAt: String!
   updatedAt: String
 }
@@ -76,6 +90,7 @@ type Verification {
   payload: String!
   key: String!
   used: Boolean
+  user: User!
   createdAt: String!
   updatedAt: String
 }

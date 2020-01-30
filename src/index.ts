@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 dotenv.config();
+// import {buildSchema} from 'type-graphql'
 import { Options } from "graphql-yoga";
 import { createConnection } from "typeorm";
 import app from "./app";
@@ -26,3 +27,6 @@ try {
   console.log(error);
 }
 // yoga-server start 🔼
+
+
+// const schema = await buildSchema({});
