@@ -6,12 +6,10 @@ import path from "path";
 const allTypes: GraphQLSchema[] = fileLoader(
   path.join(__dirname, "./api/**/*.graphql")
 );
-console.log(allTypes);
 
 const allResolvers: any[] = fileLoader(
-  path.join(__dirname, "./api/**/*.resolvers.*")
+  path.join(__dirname, './api/**/*.resolvers.*')
 );
-// console.log(allResolvers);
 
 const mergedTypes = mergeTypes(allTypes);
 const mergedResolvers = mergeResolvers(allResolvers);
