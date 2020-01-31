@@ -1,0 +1,12 @@
+type CompletePhoneVerifResponse {
+  ok: Boolean!
+  error: String
+  token: String
+}
+
+type Mutation {
+  CompletePhoneVerif(
+    phoneNumber: String!
+    key: String!
+  ): CompletePhoneVerifResponse!
+}

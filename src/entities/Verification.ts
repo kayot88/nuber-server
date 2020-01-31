@@ -26,6 +26,9 @@ class Verification extends BaseEntity {
   @Column({ type: "text" })
   key: string;
 
+  @Column({ type: "boolean", default: false })
+  verified: boolean;
+
   // @Column({ type: "boolean", default: false }) used: boolean;
 
   // @ManyToOne(
@@ -40,7 +43,7 @@ class Verification extends BaseEntity {
 
   @BeforeInsert()
   createKey(): void {
-    console.log('Creating key');
+    console.log("Creating key");
     if (this.target === PHONE) {
       this.key = Math.floor(Math.random() * 1000).toString();
     } else {

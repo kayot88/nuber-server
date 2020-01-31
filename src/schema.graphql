@@ -44,16 +44,23 @@ type Ride {
   updatedAt: String
 }
 
-type EmailSignInResponse {
+type CompletePhoneVerifResponse {
   ok: Boolean!
   error: String
   token: String
 }
 
 type Mutation {
+  CompletePhoneVerif(phoneNumber: String!, key: String!): CompletePhoneVerifResponse!
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
   FbConnection(firstName: String!, lastName: String!, email: String, fbId: String): FbConResponse!
   StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
+}
+
+type EmailSignInResponse {
+  ok: Boolean!
+  error: String
+  token: String
 }
 
 type FbConResponse {
@@ -102,6 +109,7 @@ type Verification {
   target: String!
   payload: String!
   key: String!
+  verified: String
   # used: Boolean
   user: User!
   createdAt: String!
