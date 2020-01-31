@@ -25,6 +25,7 @@
     "morgan": "^1.9.1",
     "pg": "^7.17.0",
     "reflect-metadata": "^0.1.13",
+    "twilio": "^3.39.3",
     "type-graphql": "^0.17.6",
     "typeorm": "^0.2.22"
   },
@@ -34,6 +35,7 @@
     "@types/helmet": "0.0.45",
     "@types/morgan": "^1.7.37",
     "@types/node": "^12.12.12",
+    "@types/twilio": "^2.11.0",
     "babel-runtime": "^6.26.0",
     "gql-merge": "0.0.6",
     "graphql-to-typescript": "^0.1.2",

@@ -53,6 +53,7 @@ type EmailSignInResponse {
 type Mutation {
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
   FbConnection(firstName: String!, lastName: String!, email: String, fbId: String): FbConResponse!
+  StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
 }
 
 type FbConResponse {
@@ -82,7 +83,7 @@ type User {
   lastOrientation: Float
   chat: Chat
   messages: [Message]
-  verifications: [Verification]
+  # verifications: [Verification]
   createdAt: String!
   updatedAt: String
 }
@@ -91,12 +92,17 @@ type Query {
   user: User
 }
 
+type StartPhoneVerificationResponse {
+  ok: Boolean!
+  error: String
+}
+
 type Verification {
   id: Int!
   target: String!
   payload: String!
   key: String!
-  used: Boolean
+  # used: Boolean
   user: User!
   createdAt: String!
   updatedAt: String
