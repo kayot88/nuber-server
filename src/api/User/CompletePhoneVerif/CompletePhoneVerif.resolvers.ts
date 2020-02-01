@@ -1,6 +1,7 @@
 import { Resolvers } from "src/types/resolvers";
 import Verification from "./../../../entities/Verification";
 import User from "./../../../entities/User";
+import createJWT from './../../../utils/createJWT';
 import {
   CompletePhoneVerifMutationArgs,
   CompletePhoneVerifResponse
@@ -22,7 +23,7 @@ const resolvers: Resolvers = {
           return {
             ok: false,
             error: "Verification key is not valid",
-            token: ""
+            token: null
           };
         } else {
           verification.verified = true;
@@ -32,8 +33,7 @@ const resolvers: Resolvers = {
         return {
           ok: false,
           error: error.message,
-          
-          token: "null"
+          token: null
         };
       }
       try {
@@ -44,22 +44,23 @@ const resolvers: Resolvers = {
           return {
             ok: true,
             error: null,
-            token: "Verified but have to create account"
+            token: null
           };
         } else {
           user.verifiedPhoneNumber = true;
           await user.save();
+          const token = createJWT(user.id);
           return {
             ok: true,
             error: null,
-            token: "Coming soon"
+            token
           };
         }
       } catch (error) {
         return {
           ok: false,
           error: error.message,
-          token: "null"
+          token: null
         };
       }
     }
