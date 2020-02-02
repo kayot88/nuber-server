@@ -73,9 +73,6 @@ class User extends BaseEntity {
   @Column({ type: "double precision", default: 0 })
   lastOrientation: number;
 
-  @CreateDateColumn() createdAt: string;
-  @UpdateDateColumn() updatedAt: string;
-
   @ManyToOne(
     type => Chat,
     chat => chat.participants
@@ -106,10 +103,12 @@ class User extends BaseEntity {
   )
   rideAsDriver: Ride[];
 
-  get fullname(): string {
+  @CreateDateColumn() createdAt: string;
+  @UpdateDateColumn() updatedAt: string;
+
+  get fullName(): string {
     return `${this.firstName} ${this.lastName}`;
   }
-
   public comparePassword(password: string) {
     return bcrypt.compare(password, this.password);
   }

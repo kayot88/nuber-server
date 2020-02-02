@@ -1,5 +1,5 @@
 import User from "./../../../entities/User";
-import createJWT from './../../../utils/createJWT';
+import createJWT from "./../../../utils/createJWT";
 
 import { Resolvers } from "../../../types/resolvers";
 import {
@@ -32,11 +32,11 @@ const resolvers: Resolvers = {
         };
       }
       try {
-       const newUser = await User.create({
+        const newUser = await User.create({
           ...args,
           profilePhoto: `https://graph.facebook.com/${fbId}/picture?type=normal`
         }).save();
-        const token = createJWT(newUser.id)
+        const token = createJWT(newUser.id);
         return {
           ok: true,
           error: null,

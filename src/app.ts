@@ -1,4 +1,5 @@
 import { GraphQLServer } from "graphql-yoga";
+import { NextFunction, Response } from "express";
 // import {buildSchema} from 'type-graphql';
 import cors from "cors";
 import helmet from "helmet";
@@ -11,7 +12,13 @@ class App {
 
   constructor() {
     this.app = new GraphQLServer({
-      schema
+      schema,
+      // add request to context
+      context: req => {
+        return {
+          req: req.request
+        };
+      }
     });
     this.middlewares();
   }
@@ -22,12 +29,21 @@ class App {
     this.app.express.use(logger("dev"));
     this.app.use(this.jwt);
   };
-  private jwt = async (req, res, next): Promise<void> => {
+  private jwt = async (
+    req,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> => {
     const getJwtFromReq = req.get("X-JWT");
     // console.log(getJwtFromReq)
     if (getJwtFromReq) {
-      const token = await decodeJWT(getJwtFromReq);
-      console.log(token);
+      const user = await decodeJWT(getJwtFromReq);
+      // add user object to request
+      if (user) {
+        req.user = user;
+      } else {
+        req.user = undefined;
+      }
     }
     next();
   };
