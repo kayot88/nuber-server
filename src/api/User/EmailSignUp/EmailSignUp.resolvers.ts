@@ -1,6 +1,8 @@
 import { Resolvers } from "../../../types/resolvers";
 import User from "./../../../entities/User";
-import createJWT from './../../../utils/createJWT';
+import createJWT from "./../../../utils/createJWT";
+import Verification from "./../../../entities/Verification";
+import { sendVerificationEmail } from "./../../../utils/sendEmail";
 import {
   EmailSignUpMutationArgs,
   EmailSignUpResponse
@@ -10,18 +12,41 @@ const resolvers: Resolvers = {
     EmailSignUp: async (
       _,
       args: EmailSignUpMutationArgs
-    ): Promise<EmailSignUpResponse> => {  
+    ): Promise<EmailSignUpResponse> => {
       const { email } = args;
       try {
         const existUserWithThisEmail = await User.findOne({ email });
         if (!existUserWithThisEmail) {
-          const newUser =  await User.create({ ...args }).save();
-          const token = createJWT(newUser.id);
-          return {
-            ok: true,
-            error: null,
-            token
-          };
+          const newUser = await User.create({ ...args }).save();
+
+          const phoneVerification = await Verification.findOne({
+            payload: args.phoneNumber,
+            verified: true
+          });
+          if (phoneVerification) {
+            if (newUser.email) {
+              const emailVerification = await Verification.create({
+                target: "EMAIL",
+                payload: newUser.email
+              }).save();
+              await sendVerificationEmail(
+                newUser.fullName,
+                emailVerification.key
+              );
+            }
+            const token = createJWT(newUser.id);
+            return {
+              ok: true,
+              error: null,
+              token
+            };
+          } else {
+            return {
+              ok: false,
+              error: "You dont verified your phone number",
+              token: null
+            };
+          }
         } else {
           return {
             ok: false,

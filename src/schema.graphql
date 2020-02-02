@@ -55,7 +55,6 @@ type Mutation {
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
   EmailSignUp(email: String!, firstName: String!, lastName: String!, age: Int!, password: String!, phoneNumber: String!, profilePhoto: String!): EmailSignUpResponse!
   FbConnection(firstName: String!, lastName: String!, email: String, fbId: String): FbConResponse!
-  GetMyProfile: GetMyProfileResponse!
   StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
 }
 
@@ -83,6 +82,11 @@ type GetMyProfileResponse {
   user: User
 }
 
+type Query {
+  GetMyProfile: GetMyProfileResponse!
+  user: User
+}
+
 type User {
   id: Int!
   email: String
@@ -107,10 +111,6 @@ type User {
   # verifications: [Verification]
   createdAt: String!
   updatedAt: String
-}
-
-type Query {
-  user: User
 }
 
 type StartPhoneVerificationResponse {
