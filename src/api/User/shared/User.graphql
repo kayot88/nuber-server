@@ -18,6 +18,7 @@ type User {
   lastLat: Float
   lastOrientation: Float
   chat: Chat
+  places:[Place]
   messages: [Message]
   # verifications: [Verification]
   createdAt: String!
