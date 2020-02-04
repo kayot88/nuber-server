@@ -15,12 +15,13 @@ type Message {
   updatedAt: String
 }
 
-type EditPlaceResponse {
+type DeletePlaceResponse {
   ok: Boolean!
   error: String
 }
 
 type Mutation {
+  DeletePlace(placeId: Int!): DeletePlaceResponse!
   EditPlace(placeId: Int!, name: String!, isFavor: String!): EditPlaceResponse!
   AddPlace(name: String!, lastLng: Float!, lastLat: Float!, address: String!, isFavor: Boolean!): AddPlaceResponse!
   CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
@@ -33,6 +34,11 @@ type Mutation {
   StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
   ToggleDrivingMode: ToggleDrivingModeResponse!
   UpdateMyProfile(email: String, firstName: String, lastName: String, age: Int, password: String, profilePhoto: String): UpdateMyProfileResponse!
+}
+
+type EditPlaceResponse {
+  ok: Boolean!
+  error: String
 }
 
 type AddPlaceResponse {
