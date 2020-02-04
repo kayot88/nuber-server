@@ -15,12 +15,13 @@ type Message {
   updatedAt: String
 }
 
-type AddPlaceResponse {
+type EditPlaceResponse {
   ok: Boolean!
   error: String
 }
 
 type Mutation {
+  EditPlace(placeId: Int!, name: String!, isFavor: String!): EditPlaceResponse!
   AddPlace(name: String!, lastLng: Float!, lastLat: Float!, address: String!, isFavor: Boolean!): AddPlaceResponse!
   CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
   CompletePhoneVerif(phoneNumber: String!, key: String!): CompletePhoneVerifResponse!
@@ -34,6 +35,11 @@ type Mutation {
   UpdateMyProfile(email: String, firstName: String, lastName: String, age: Int, password: String, profilePhoto: String): UpdateMyProfileResponse!
 }
 
+type AddPlaceResponse {
+  ok: Boolean!
+  error: String
+}
+
 type Place {
   id: Int!
   name: String!
@@ -41,6 +47,8 @@ type Place {
   lng: Float!
   address: String!
   isFavor: Boolean!
+  userId: Int!
+  user: User!
   createdAt: String!
   updatedAt: String
 }
@@ -133,6 +141,7 @@ type User {
   lastLat: Float
   lastOrientation: Float
   chat: Chat
+  places: [Place]
   messages: [Message]
   # verifications: [Verification]
   createdAt: String!

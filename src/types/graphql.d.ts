@@ -1,4 +1,4 @@
-export const typeDefs = ["type Chat {\n  id: Int!\n  messages: [Message]!\n  participants: [User]!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Message {\n  id: Int!\n  text: String!\n  chat: Chat!\n  user: User!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype AddPlaceResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Mutation {\n  AddPlace(name: String!, lastLng: Float!, lastLat: Float!, address: String!, isFavor: Boolean!): AddPlaceResponse!\n  CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!\n  CompletePhoneVerif(phoneNumber: String!, key: String!): CompletePhoneVerifResponse!\n  EmailSignIn(email: String!, password: String!): EmailSignInResponse!\n  EmailSignUp(email: String!, firstName: String!, lastName: String!, age: Int!, password: String!, phoneNumber: String!, profilePhoto: String!): EmailSignUpResponse!\n  FbConnection(firstName: String!, lastName: String!, email: String, fbId: String): FbConResponse!\n  ReportMovement(orientation: Float, lat: Float, lng: Float): ReportMovementResponse!\n  RequestEmailVerification: RequestEmailVerificationResponse!\n  StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!\n  ToggleDrivingMode: ToggleDrivingModeResponse!\n  UpdateMyProfile(email: String, firstName: String, lastName: String, age: Int, password: String, profilePhoto: String): UpdateMyProfileResponse!\n}\n\ntype Place {\n  id: Int!\n  name: String!\n  lat: Float!\n  lng: Float!\n  address: String!\n  isFavor: Boolean!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Ride {\n  id: Int!\n  status: String!\n  pickUpAddress: String!\n  pickUpLat: Float!\n  pickUpLng: Float!\n  dropOffAddress: String!\n  dropOffLat: Float!\n  dropOffLng: Float!\n  price: Float!\n  driver: User!\n  passenger: User!\n  distance: String!\n  duration: String!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype CompleteEmailVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype CompletePhoneVerifResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype EmailSignInResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype EmailSignUpResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype FbConResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype GetMyProfileResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype Query {\n  GetMyProfile: GetMyProfileResponse!\n  user: User\n}\n\ntype ReportMovementResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype RequestEmailVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype User {\n  id: Int!\n  email: String\n  verifiedEmail: Boolean!\n  firstName: String!\n  lastName: String!\n  age: Int\n  password: String\n  phoneNumber: String\n  verifiedPhoneNumber: Boolean!\n  fbId: String\n  profilePhoto: String\n  fullName: String\n  isDriving: Boolean!\n  isRiding: Boolean!\n  isTaken: Boolean!\n  lastLng: Float\n  lastLat: Float\n  lastOrientation: Float\n  chat: Chat\n  messages: [Message]\n  # verifications: [Verification]\n  createdAt: String!\n  updatedAt: String\n}\n\ntype StartPhoneVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype ToggleDrivingModeResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype UpdateMyProfileResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Verification {\n  id: Int!\n  target: String!\n  payload: String!\n  key: String!\n  verified: String\n  # used: Boolean\n  user: User!\n  createdAt: String!\n  updatedAt: String\n}\n"];
+export const typeDefs = ["type Chat {\n  id: Int!\n  messages: [Message]!\n  participants: [User]!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Message {\n  id: Int!\n  text: String!\n  chat: Chat!\n  user: User!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype EditPlaceResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Mutation {\n  EditPlace(placeId: Int!, name: String!, isFavor: String!): EditPlaceResponse!\n  AddPlace(name: String!, lastLng: Float!, lastLat: Float!, address: String!, isFavor: Boolean!): AddPlaceResponse!\n  CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!\n  CompletePhoneVerif(phoneNumber: String!, key: String!): CompletePhoneVerifResponse!\n  EmailSignIn(email: String!, password: String!): EmailSignInResponse!\n  EmailSignUp(email: String!, firstName: String!, lastName: String!, age: Int!, password: String!, phoneNumber: String!, profilePhoto: String!): EmailSignUpResponse!\n  FbConnection(firstName: String!, lastName: String!, email: String, fbId: String): FbConResponse!\n  ReportMovement(orientation: Float, lat: Float, lng: Float): ReportMovementResponse!\n  RequestEmailVerification: RequestEmailVerificationResponse!\n  StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!\n  ToggleDrivingMode: ToggleDrivingModeResponse!\n  UpdateMyProfile(email: String, firstName: String, lastName: String, age: Int, password: String, profilePhoto: String): UpdateMyProfileResponse!\n}\n\ntype AddPlaceResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Place {\n  id: Int!\n  name: String!\n  lat: Float!\n  lng: Float!\n  address: String!\n  isFavor: Boolean!\n  userId: Int!\n  user: User!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Ride {\n  id: Int!\n  status: String!\n  pickUpAddress: String!\n  pickUpLat: Float!\n  pickUpLng: Float!\n  dropOffAddress: String!\n  dropOffLat: Float!\n  dropOffLng: Float!\n  price: Float!\n  driver: User!\n  passenger: User!\n  distance: String!\n  duration: String!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype CompleteEmailVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype CompletePhoneVerifResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype EmailSignInResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype EmailSignUpResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype FbConResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype GetMyProfileResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype Query {\n  GetMyProfile: GetMyProfileResponse!\n  user: User\n}\n\ntype ReportMovementResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype RequestEmailVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype User {\n  id: Int!\n  email: String\n  verifiedEmail: Boolean!\n  firstName: String!\n  lastName: String!\n  age: Int\n  password: String\n  phoneNumber: String\n  verifiedPhoneNumber: Boolean!\n  fbId: String\n  profilePhoto: String\n  fullName: String\n  isDriving: Boolean!\n  isRiding: Boolean!\n  isTaken: Boolean!\n  lastLng: Float\n  lastLat: Float\n  lastOrientation: Float\n  chat: Chat\n  places: [Place]\n  messages: [Message]\n  # verifications: [Verification]\n  createdAt: String!\n  updatedAt: String\n}\n\ntype StartPhoneVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype ToggleDrivingModeResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype UpdateMyProfileResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype Verification {\n  id: Int!\n  target: String!\n  payload: String!\n  key: String!\n  verified: String\n  # used: Boolean\n  user: User!\n  createdAt: String!\n  updatedAt: String\n}\n"];
 /* tslint:disable */
 
 export interface Query {
@@ -32,6 +32,7 @@ export interface User {
   lastLat: number | null;
   lastOrientation: number | null;
   chat: Chat | null;
+  places: Array<Place> | null;
   messages: Array<Message> | null;
   createdAt: string;
   updatedAt: string | null;
@@ -54,7 +55,21 @@ export interface Message {
   updatedAt: string | null;
 }
 
+export interface Place {
+  id: number;
+  name: string;
+  lat: number;
+  lng: number;
+  address: string;
+  isFavor: boolean;
+  userId: number;
+  user: User;
+  createdAt: string;
+  updatedAt: string | null;
+}
+
 export interface Mutation {
+  EditPlace: EditPlaceResponse;
   AddPlace: AddPlaceResponse;
   CompleteEmailVerification: CompleteEmailVerificationResponse;
   CompletePhoneVerif: CompletePhoneVerifResponse;
@@ -66,6 +81,12 @@ export interface Mutation {
   StartPhoneVerification: StartPhoneVerificationResponse;
   ToggleDrivingMode: ToggleDrivingModeResponse;
   UpdateMyProfile: UpdateMyProfileResponse;
+}
+
+export interface EditPlaceMutationArgs {
+  placeId: number;
+  name: string;
+  isFavor: string;
 }
 
 export interface AddPlaceMutationArgs {
@@ -126,6 +147,11 @@ export interface UpdateMyProfileMutationArgs {
   profilePhoto: string | null;
 }
 
+export interface EditPlaceResponse {
+  ok: boolean;
+  error: string | null;
+}
+
 export interface AddPlaceResponse {
   ok: boolean;
   error: string | null;
@@ -183,17 +209,6 @@ export interface ToggleDrivingModeResponse {
 export interface UpdateMyProfileResponse {
   ok: boolean;
   error: string | null;
-}
-
-export interface Place {
-  id: number;
-  name: string;
-  lat: number;
-  lng: number;
-  address: string;
-  isFavor: boolean;
-  createdAt: string;
-  updatedAt: string | null;
 }
 
 export interface Ride {
