@@ -1,22 +1,24 @@
-import { GraphQLServer } from "graphql-yoga";
+import { GraphQLServer, PubSub } from "graphql-yoga";
 import { NextFunction, Response } from "express";
-// import {buildSchema} from 'type-graphql';
 import cors from "cors";
 import helmet from "helmet";
 import logger from "morgan";
 import schema from "./schema";
-// import jwt from 'jsonwebtoken';
 import decodeJWT from "./utils/decodeJWT";
 class App {
   public app: GraphQLServer;
+  public pubSub: any;
 
   constructor() {
+    this.pubSub = new PubSub();
+    this.pubSub.ee.setMaxListeners(99);
     this.app = new GraphQLServer({
       schema,
       // add request to context
       context: req => {
         return {
-          req: req.request
+          req: req.request,
+          pubSub: this.pubSub
         };
       }
     });
