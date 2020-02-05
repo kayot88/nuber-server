@@ -15,15 +15,15 @@ type Message {
   updatedAt: String
 }
 
-type DeletePlaceResponse {
+type AddPlaceResponse {
   ok: Boolean!
   error: String
 }
 
 type Mutation {
-  DeletePlace(placeId: Int!): DeletePlaceResponse!
-  EditPlace(placeId: Int!, name: String!, isFavor: String!): EditPlaceResponse!
   AddPlace(name: String!, lastLng: Float!, lastLat: Float!, address: String!, isFavor: Boolean!): AddPlaceResponse!
+  DeletePlace(placeId: Int!): DeletePlaceResponse!
+  EditPlace(id: Int!, name: String!, isFavor: Boolean!): EditPlaceResponse!
   CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
   CompletePhoneVerif(phoneNumber: String!, key: String!): CompletePhoneVerifResponse!
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
@@ -36,14 +36,26 @@ type Mutation {
   UpdateMyProfile(email: String, firstName: String, lastName: String, age: Int, password: String, profilePhoto: String): UpdateMyProfileResponse!
 }
 
+type DeletePlaceResponse {
+  ok: Boolean!
+  error: String
+}
+
 type EditPlaceResponse {
   ok: Boolean!
   error: String
 }
 
-type AddPlaceResponse {
+type GetMyPlacesResponce {
   ok: Boolean!
   error: String
+  places: [Place]
+}
+
+type Query {
+  GetMyPlaces: GetMyPlacesResponce!
+  GetMyProfile: GetMyProfileResponse!
+  user: User
 }
 
 type Place {
@@ -109,11 +121,6 @@ type FbConResponse {
 type GetMyProfileResponse {
   ok: Boolean!
   error: String
-  user: User
-}
-
-type Query {
-  GetMyProfile: GetMyProfileResponse!
   user: User
 }
 

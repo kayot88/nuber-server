@@ -3,5 +3,5 @@ type EditPlaceResponse {
   error: String
 }
 type Mutation {
-  EditPlace(placeId: Int!, name: String!, isFavor: String!): EditPlaceResponse!
+  EditPlace(id: Int!, name: String!, isFavor: Boolean!): EditPlaceResponse!
 }

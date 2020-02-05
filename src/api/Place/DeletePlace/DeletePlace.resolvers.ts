@@ -1,5 +1,5 @@
 import { Resolvers } from "src/types/resolvers";
-import { privatResolver } from "src/utils/privatResolver";
+import { privatResolver } from "./../../../utils/privatResolver";
 import User from "src/entities/User";
 import Place from "./../../../entities/Place";
 import {

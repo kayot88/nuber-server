@@ -1,11 +1,8 @@
 import { Resolvers } from "src/types/resolvers";
-import { privatResolver } from "./../../../../utils/privatResolver";
-import User from "./../../../../entities/User";
-import Place from "./../../../../entities/Place";
-import {
-  AddPlaceResponse,
-  AddPlaceMutationArgs
-} from "./../../../../types/graphql.d";
+import User from "./../../../entities/User";
+import Place from "./../../../entities/Place";
+import { privatResolver } from "./../../../utils/privatResolver";
+import { AddPlaceResponse, AddPlaceMutationArgs } from "../../../types/graphql";
 
 const resolvers: Resolvers = {
   Mutation: {
