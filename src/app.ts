@@ -16,10 +16,21 @@ class App {
       schema,
       // add request to context
       context: req => {
-        return {
-          req: req.request,
-          pubSub: this.pubSub
-        };
+      //  or const {connection:{context = null} = {}} = req
+        if (!req.connection) {
+          return {
+            req: req.request,
+            pubSub: this.pubSub,
+            connectionContext: null
+          };
+        } else {
+          const context = req.connection.context;
+          return {
+            req: req.request,
+            pubSub: this.pubSub,
+            connectionContext: context
+          };
+        }
       }
     });
     this.middlewares();
