@@ -16,7 +16,8 @@ class Ride extends BaseEntity {
 
   @Column({
     type: "text",
-    enum: ["ACCEPTED", "FINISHED", "CANCELED", "REQUESTING", "ONROUTE"]
+    enum: ["ACCEPTED", "FINISHED", "CANCELED", "REQUESTING", "ONROUTE"],
+    default: "ACCEPTED"
   })
   status: rideStatus;
 
@@ -55,7 +56,8 @@ class Ride extends BaseEntity {
 
   @ManyToOne(
     type => User,
-    user => user.rideAsDriver
+    user => user.rideAsDriver,
+    {nullable: true}
   )
   driver: User;
 
