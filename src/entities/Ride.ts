@@ -57,7 +57,7 @@ class Ride extends BaseEntity {
   @ManyToOne(
     type => User,
     user => user.rideAsDriver,
-    {nullable: true}
+    { nullable: true }
   )
   driver: User;
 

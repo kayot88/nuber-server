@@ -26,6 +26,7 @@ type Mutation {
   EditPlace(id: Int!, name: String!, isFavor: Boolean!): EditPlaceResponse!
   GetNearbyRide: GetNearbyRideResponse!
   RequestRide(pickUpAddress: String!, pickUpLat: Float!, pickUpLng: Float!, dropOffAddress: String!, dropOffLat: Float!, dropOffLng: Float!, price: Float!, distance: String!, duration: String!): RequestRideResponce!
+  UpdateRideStatus(rideId: Int!, status: statusOpt!): UpdateRideStatusResponse!
   CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
   CompletePhoneVerif(phoneNumber: String!, key: String!): CompletePhoneVerifResponse!
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
@@ -86,9 +87,14 @@ type RequestRideResponce {
   ride: Ride
 }
 
+type Subscription {
+  RideSubsc: Ride
+  DriverSubsc: User
+}
+
 type Ride {
   id: Int!
-  status: String!
+  status: String
   pickUpAddress: String!
   pickUpLat: Float!
   pickUpLng: Float!
@@ -104,6 +110,19 @@ type Ride {
   updatedAt: String
 }
 
+type UpdateRideStatusResponse {
+  ok: Boolean!
+  error: String
+}
+
+enum statusOpt {
+  ACCEPTED
+  FINISHED
+  CANCELED
+  REQUESTING
+  ONROUTE
+}
+
 type CompleteEmailVerificationResponse {
   ok: Boolean!
   error: String
@@ -113,10 +132,6 @@ type CompletePhoneVerifResponse {
   ok: Boolean!
   error: String
   token: String
-}
-
-type Subscription {
-  DriverSubsc: User
 }
 
 type EmailSignInResponse {
