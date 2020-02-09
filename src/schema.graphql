@@ -1,7 +1,10 @@
 type Chat {
   id: Int!
-  messages: [Message]!
-  participants: [User]!
+  messages: [Message]
+  passenger: User!
+  passengerId: Int!
+  driver: User!
+  driverId: Int!
   createdAt: String!
   updatedAt: String
 }
@@ -95,6 +98,7 @@ type RequestRideResponce {
 }
 
 type Subscription {
+  RideStatusSubscr: Ride!
   RideSubsc: Ride
   DriverSubsc: User
 }
@@ -109,7 +113,9 @@ type Ride {
   dropOffLat: Float!
   dropOffLng: Float!
   price: Float!
+  driverId: Int!
   driver: User!
+  passengerId: Int!
   passenger: User!
   distance: String!
   duration: String!
@@ -199,11 +205,11 @@ type User {
   isTaken: Boolean!
   lastLng: Float
   lastLat: Float
+  chatsAsDriver: [Chat]
+  chatsAsPassenger: [Chat]
   lastOrientation: Float
-  chat: Chat
   places: [Place]
   messages: [Message]
-  # verifications: [Verification]
   createdAt: String!
   updatedAt: String
 }

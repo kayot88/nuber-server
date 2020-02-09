@@ -7,7 +7,6 @@ import {
   UpdateDateColumn,
   BeforeInsert,
   BeforeUpdate,
-  ManyToOne,
   OneToMany
 } from "typeorm";
 import { IsEmail } from "class-validator";
@@ -20,7 +19,7 @@ import Place from './Place';
 const saltRounds = 10;
 
 @Entity()
-class User extends BaseEntity {
+class User extends BaseEntity {   
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -73,11 +72,17 @@ class User extends BaseEntity {
   @Column({ type: "double precision", default: 0 })
   lastOrientation: number;
 
-  @ManyToOne(
+  @OneToMany(
     type => Chat,
-    chat => chat.participants
+    chat => chat.driver
   )
-  chat: Chat;
+  chatsAsDriver: Chat[];
+
+  @OneToMany(
+    type => Chat,
+    chat => chat.passenger
+  )
+  chatsAsPassenger: Chat[];
 
   @OneToMany(
     type => Message,

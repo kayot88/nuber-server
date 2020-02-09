@@ -16,11 +16,11 @@ type User {
   isTaken: Boolean!
   lastLng: Float
   lastLat: Float
+  chatsAsDriver: [Chat]
+  chatsAsPassenger: [Chat]
   lastOrientation: Float
-  chat: Chat
   places:[Place]
   messages: [Message]
-  # verifications: [Verification]
   createdAt: String!
   updatedAt: String
 }
