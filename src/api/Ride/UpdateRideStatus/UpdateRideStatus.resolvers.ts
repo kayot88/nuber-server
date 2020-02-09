@@ -11,9 +11,11 @@ const resolvers: Resolvers = {
       async (
         _,
         args: UpdateRideStatusMutationArgs,
-        { req }
+        { req, pubSub }
       ): Promise<UpdateRideStatusResponse> => {
         const user: User = req.user;
+        // user.isDriving = true
+        // console.log("user.isDrivingddddddddddddddddddddddddd", user.isDriving);
         if (user.isDriving) {
           try {
             let ride: Ride | undefined;
@@ -36,6 +38,8 @@ const resolvers: Resolvers = {
             if (ride) {
               ride.status = args.status;
               ride.save();
+              pubSub.publish("rideUpdate", { RideStatusSubscr: ride });
+
               return {
                 ok: true,
                 error: null
