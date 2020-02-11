@@ -13,32 +13,21 @@ type Query {
   user: User
 }
 
-type Chat {
-  id: Int!
-  messages: [Message]
-  passenger: User!
-  passengerId: Int!
-  driver: User!
-  driverId: Int!
-  createdAt: String!
-  updatedAt: String
+type Subscription {
+  MessageSubsc: Message
+  RideStatusSubscr: Ride!
+  RideSubsc: Ride
+  DriverSubsc: User
 }
 
-type Message {
-  id: Int!
-  text: String!
-  chat: Chat!
-  user: User!
-  createdAt: String!
-  updatedAt: String
-}
-
-type AddPlaceResponse {
+type SendMessageResponse {
   ok: Boolean!
   error: String
+  message: Message
 }
 
 type Mutation {
+  SendMessage(text: String!, chatId: Int!): SendMessageResponse!
   AddPlace(name: String!, lastLng: Float!, lastLat: Float!, address: String!, isFavor: Boolean!): AddPlaceResponse!
   DeletePlace(placeId: Int!): DeletePlaceResponse!
   EditPlace(id: Int!, name: String!, isFavor: Boolean!): EditPlaceResponse!
@@ -55,6 +44,34 @@ type Mutation {
   StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!
   ToggleDrivingMode: ToggleDrivingModeResponse!
   UpdateMyProfile(email: String, firstName: String, lastName: String, age: Int, password: String, profilePhoto: String): UpdateMyProfileResponse!
+}
+
+type Chat {
+  id: Int!
+  messages: [Message]
+  passenger: User!
+  passengerId: Int!
+  ride: Ride!
+  rideId: Int!
+  driver: User!
+  driverId: Int!
+  createdAt: String!
+  updatedAt: String
+}
+
+type Message {
+  id: Int!
+  text: String!
+  chat: Chat!
+  chatId: Int!
+  user: User!
+  createdAt: String!
+  updatedAt: String
+}
+
+type AddPlaceResponse {
+  ok: Boolean!
+  error: String
 }
 
 type DeletePlaceResponse {
@@ -104,12 +121,6 @@ type RequestRideResponce {
   ride: Ride
 }
 
-type Subscription {
-  RideStatusSubscr: Ride!
-  RideSubsc: Ride
-  DriverSubsc: User
-}
-
 type Ride {
   id: Int!
   status: String
@@ -120,6 +131,8 @@ type Ride {
   dropOffLat: Float!
   dropOffLng: Float!
   price: Float!
+  chat: Chat
+  chatId: Int
   driverId: Int!
   driver: User!
   passengerId: Int!
