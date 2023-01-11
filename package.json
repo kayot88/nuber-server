@@ -16,7 +16,7 @@
     "@types/jsonwebtoken": "^8.3.7",
     "@types/mailgun-js": "^0.22.3",
     "bcrypt": "^3.0.7",
-    "class-validator": "^0.11.0",
+    "class-validator": "^0.14.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "graphql": "^14.5.8",
